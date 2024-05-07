@@ -48,8 +48,8 @@ local sections = {}
 -- Theme Variables
 --local themes = {}
 local theme = {
-    accent = Color3.fromRGB(241, 52, 52),
-    light_contrast = Color3.fromRGB(0, 0, 0),
+    accent = Color3.fromRGB(50, 100, 255),
+    light_contrast = Color3.fromRGB(30, 30, 30),
     dark_contrast = Color3.fromRGB(20, 20, 20),
     outline = Color3.fromRGB(0, 0, 0),
     inline = Color3.fromRGB(50, 50, 50),
@@ -883,41 +883,7 @@ do
             end)
         end
         --
-        function window:Cursor(info)
-            window.cursor = {}
-            --
-            local cursor = utility:Create("Triangle", nil, {
-                Color = theme.cursoroutline,
-                Thickness = 2.5,
-                Filled = false,
-                ZIndex = 65,
-                Hidden = true
-            });window.cursor["cursor"] = cursor
-            --
-            local cursor_inline = utility:Create("Triangle", nil, {
-                Color = theme.accent,
-                Filled = true,
-                Thickness = 0,
-                ZIndex = 65,
-                Hidden = true
-            });window.cursor["cursor_inline"] = cursor_inline
-            --
-            utility:Connection(rs.RenderStepped, function()
-                local mouseLocation = utility:MouseLocation()
-                --
-                cursor.PointA = Vector2.new(mouseLocation.X, mouseLocation.Y)
-                cursor.PointB = Vector2.new(mouseLocation.X + 16, mouseLocation.Y + 6)
-                cursor.PointC = Vector2.new(mouseLocation.X + 6, mouseLocation.Y + 16)
-                --
-                cursor_inline.PointA = Vector2.new(mouseLocation.X, mouseLocation.Y)
-                cursor_inline.PointB = Vector2.new(mouseLocation.X + 16, mouseLocation.Y + 6)
-                cursor_inline.PointC = Vector2.new(mouseLocation.X + 6, mouseLocation.Y + 16)
-            end)
-            --
-            uis.MouseIconEnabled = false
-            --
-            return window.cursor
-        end
+        
         --
         function window:Fade()
             window.fading = true
@@ -929,8 +895,7 @@ do
                 end
             end)
             --
-            window.cursor["cursor"].Transparency = window.isVisible and 1 or 0
-            window.cursor["cursor_inline"].Transparency = window.isVisible and 1 or 0
+
             uis.MouseIconEnabled = not window.isVisible
             --
             window.fading = false
